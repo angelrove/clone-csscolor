@@ -1,4 +1,6 @@
 <?php
+namespace angelrove\clone_csscolor;
+
 /*
  csscolor.php
  Copyright 2004 Patrick Fitzgerald
@@ -19,11 +21,11 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-require_once 'PEAR.php';
+// require_once 'PEAR.php';
 
 define('CSS_COLOR_ERROR', 100);
 
-class CSS_Color extends PEAR
+class CSS_Color// extends PEAR
 {
   //==================================================
   //==PARAMETERS======================================
@@ -44,7 +46,7 @@ class CSS_Color extends PEAR
   // Note: you should not change this directly,
   // instead use setBrightDiff() and getBrightDiff()
   var $minBrightDiff = 126;
-  
+
   // colorDiff is the minimum color difference
   // between the background and the foreground.
   // Note: you should not change this directly,
@@ -55,14 +57,14 @@ class CSS_Color extends PEAR
   //==CONSTRUCTOR=====================================
   //==================================================
 
-  function CSS_Color($bgHex, $fgHex='')
+  function __construct($bgHex, $fgHex='')
   {
     // This is the constructor method for the class,
     // which is called when a new object is created.
 
     // Initialize this PEAR object so I can
     // use the PEAR error return mechanism
-    $this->PEAR();
+    // $this->PEAR();
 
     // Initialize the palette
     $this->setPalette($bgHex, $fgHex);
@@ -192,10 +194,10 @@ class CSS_Color extends PEAR
 
     // Regexp for a valid hex digit
     $d = '[a-fA-F0-9]';
-    
+
     // Make sure $hex is valid
     if (preg_match("/^($d$d)($d$d)($d$d)\$/", $hex, $rgb)) {
-      
+
       return array(
 		   hexdec($rgb[1]),
 		   hexdec($rgb[2]),
@@ -203,7 +205,7 @@ class CSS_Color extends PEAR
 		   );
     }
     if (preg_match("/^($d)($d)($d)$/", $hex, $rgb)) {
-      
+
       return array(
 		   hexdec($rgb[1] . $rgb[1]),
 		   hexdec($rgb[2] . $rgb[2]),
@@ -259,7 +261,7 @@ class CSS_Color extends PEAR
 
     // Regexp for a valid hex digit
     $d = '[a-fA-F0-9]';
-    
+
     // Make sure $hex is valid
     if (preg_match("/^#?$d$d$d$d$d$d\$/", $hex) ||
 	preg_match("/^#?$d$d$d\$/", $hex)) {
@@ -422,11 +424,18 @@ class CSS_Color extends PEAR
   }
 
   //--------------------------------------------------
+  // function &raiseError($message, $method, $line)
+  // {
+  //   $error = PEAR::raiseError(sprintf("%s.%s() line %d: %s",
+  //             get_class($this), $method, $line, $message),
+  //           CSS_COLOR_ERROR);
+  // }
+  //--------------------------------------------------
   function &raiseError($message, $method, $line)
   {
-    $error = PEAR::raiseError(sprintf("%s.%s() line %d: %s",
-				      get_class($this), $method, $line, $message),
-			      CSS_COLOR_ERROR);
+    echo(
+        sprintf("%s.%s() line %d: %s", get_class($this), $method, $line, $message) .' - ' . CSS_COLOR_ERROR
+      );
   }
 
 }
