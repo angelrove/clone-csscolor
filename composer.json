@@ -1,0 +1,18 @@
+{
+    "name": "angelrove/clone-csscolor",
+    "type": "library",
+    "description": "Clone of csscolor librari",
+    "authors": [
+        {
+            "name": "Patrick Fitzgerald"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload": {
+        "classmap": [
+
+        ]
+    }
+}
